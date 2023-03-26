@@ -1,0 +1,4 @@
+outs:
+- md5: d73369b062de601b85d4fbd3045ba7a2
+  size: 17293009
+  path: osnet_ain.pth

@@ -1,0 +1,37 @@
+DEFAULT:
+  LOGGING:
+    LEVEL: "DEBUG"
+    FORMAT: "{time:YYYY-MM-DDTHH:mm:ss.SSSS}, {process.name}: {message}"
+  APP_CONFIG:
+    ATTEMPTS_BEFORE_SHUTDOWN: 5
+
+  VIDEO_SOURCE:
+    TYPE: OpenCVVideoSource
+    SOURCE: "@format {this.ASSETS}/videos/1606926364_5-68134_camera-entrance_200-200-400-400_24_934.mp4"
+    FPS: 1
+  PIPELINE:
+    - PersonDetector
+    - PersonEmbedding
+    - Tracker
+    - TracksFilePublisher
+    - TracksDataFilePublisher
+  UNITS:
+    TRACKS_FILE_PUBLISHER:
+      FILENAME: "@format {this.OUTPUTS}/{this.CAMERA_ID}/yyyy-mm-dd/tracks.json"
+    TRACKS_DATA_FILE_PUBLISHER:
+      FILENAME: "@format {this.OUTPUTS}/{this.CAMERA_ID}/yyyy-mm-dd/tracks_data"
+  MODELS:
+    PERSON_DETECTOR:
+      TYPE: PersonDetectron2
+      WEIGHTS: "@format {this.ASSETS}/models/person_detector.pb"
+      THRESHOLD: 0.2
+    PERSON_EMBEDDING:
+      TYPE: PersonEmbeddingTorchReid
+      WEIGHTS: "@format {this.ASSETS}/models/person_embedding.pb"
+  ASSETS: assets
+  OUTPUTS: output
+  CAMERA_ID: entrance
+
+
+
+

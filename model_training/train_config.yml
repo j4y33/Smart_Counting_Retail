@@ -1,0 +1,22 @@
+remote_server_uri : "http://10.147.17.161:5000/"
+experment_name : "model_training"
+
+root : 'model_training/crops/dataset_4_328/'
+save_dir : 'model_training/models/resnet50Triplet_4_328_custom_size/'
+device : 'cuda:0'
+
+batch_size: 16
+max_epoch : 20
+alpha : 0.0003
+stepsize : 10
+
+engine : 'ImageTripletEngine'
+model : 'osnet_ain_x1_0'
+optimizer : 'adam'
+
+height : 381
+width : 189
+
+margin : 0.3
+weight_t : 0.7
+weight_x : 1

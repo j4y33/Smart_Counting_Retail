@@ -1,0 +1,1 @@
+{"min_num_det": 1, "min_y_std": 0, "min_occurrences": 5, "min_size": [0, 0], "event_zone": [[700,100], [1350, 100], [1350, 500], [700,500]], "filter_zone": [[700,100], [1350, 100], [1350, 500], [700,500]], "use_zone_filter": true, "start_time": "04:00:00", "end_time": "23:59:00"}

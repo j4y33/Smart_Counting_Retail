@@ -1,0 +1,5 @@
+pathes_to_stores : {
+  store-1: "/home/darklen/Dropbox/stores/chausse-dantin-1",
+  store-2: "/home/pi/camai/reporting/stores/plaisir-2/"
+}
+tz: "Europe/Paris"

@@ -1,0 +1,46 @@
+DEFAULT:
+  LOGGING:
+    LEVEL: "DEBUG"
+    FORMAT: "{time:YYYY-MM-DDTHH:mm:ss.SSSS}, {process.name}: {message}"
+  APP_CONFIG:
+    ATTEMPTS_BEFORE_SHUTDOWN: 5
+
+  VIDEO_SOURCE:
+    TYPE: FFmpegVideoSource
+    SOURCE: "@format {this.ASSETS}/videos/cash_desk_2020_12_03_17_59_38.mp4"
+    FPS: 1
+  PIPELINE:
+    - PersonsFileReader
+    - Tracker
+    # - TracksFilePublisher
+    # - PersonsFilePublisher
+    # - TracksDataFilePublisher
+    - DataOverlay
+  UNITS:
+    TRACKS_FILE_PUBLISHER:
+      FILENAME: "@format {this.OUTPUTS}/tracks.json"
+    PERSONS_FILE_PUBLISHER:
+      FILENAME: "@format {this.OUTPUTS}/persons.json"
+    PERSONS_FILE_READER:
+      FILENAME: "@format {this.OUTPUTS}/persons.json"
+    TRACKS_DATA_FILE_PUBLISHER:
+      FILENAME: "@format {this.OUTPUTS}/tracks_data"
+    DATA_OVERLAY:
+      DISPLAY:
+        ENABLED: False
+        WIDTH: 960
+        HEIGHT: 540
+        TITLE: Camai
+      DVR:
+        ENABLED: False
+        FILENAME: overlays.mp4
+        CRF: 23
+        PRESET: ultrafast
+  ASSETS: assets
+  OUTPUTS: output
+  CAMERA_ID: entrance
+  DATE: "2021-01-30"
+
+
+
+

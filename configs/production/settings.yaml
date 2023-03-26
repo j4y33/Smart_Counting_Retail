@@ -1,0 +1,71 @@
+DEFAULT:
+  LOGGING:
+    LEVEL: "DEBUG"
+    FORMAT: "{time:YYYY-MM-DDTHH:mm:ss.SSSS}, {process.name}: {message}"
+  APP_CONFIG:
+    ATTEMPTS_BEFORE_SHUTDOWN: 5
+
+  VIDEO_SOURCE:
+    TYPE: KerberosVideoSource
+    CONFIG:
+      TYPE: FFmpegVideoSource
+      SOURCE: /home/darklen/Dropbox/annotation_tasks/2021-01-02-12-00-23_2021-01-02-13-59-20_entrance.mp4
+      FPS: 1
+  PIPELINE:
+    - PersonDetector
+    - PersonEmbedding
+    - Tracker
+    - TracksFilePublisher
+    - TracksDataFilePublisher
+    - ProcessedVideosFileWriter
+    # - TracksFilePublisher
+    # - PersonsFilePublisher
+    #- OnlyCropsPublisher
+   # - DataOverlay
+
+  UNITS:
+    ONLY_CROPS_PUBLISHER:
+      FOLDER: "@format {this.OUTPUTS}/crops4"
+      TRACKS_NUM: 1000000
+      CROP_LIMIT: 9999999
+    TRACKER:
+      SEQUENTIAL_TRACK_ID: TRUE
+      COSINE_DISTANCE_THRESHOLD : 0.5
+      MIN_TRACK_LENGTH: 3
+    TRACKS_FILE_PUBLISHER:
+      FILENAME: "@format {this.OUTPUTS}/tracks.json"
+    PERSONS_FILE_PUBLISHER:
+      FILENAME: "@format {this.OUTPUTS}/persons.json"
+    PERSONS_FILE_READER:
+      FILENAME: "@format {this.OUTPUTS}/persons.json"
+    TRACKS_DATA_FILE_PUBLISHER:
+      FOLDER: "@format {this.OUTPUTS}/tracks_data"
+    PROCESSED_VIDEOS_FILE_WRITER:
+      FILENAME: "@format {this.OUTPUTS}/processed_videos.txt"
+    DATA_OVERLAY:
+      DISPLAY:
+        ENABLED: False
+        WIDTH: 960
+        HEIGHT: 540
+        TITLE: Camai
+      DVR:
+        ENABLED: False
+        FILENAME: "@format {this.OUTPUTS}/overlays.mp4"
+        CRF: 23
+        PRESET: ultrafast
+  MODELS:
+    PERSON_DETECTOR:
+      TYPE: PersonDetectron2
+      WEIGHTS: "@format {this.ASSETS}/models/configs/COCO-Keypoints/keypoint_rcnn_R_50_FPN_3x.yaml"
+      DETECTOR_THRESHOLD: 0.9
+    PERSON_EMBEDDING:
+      TYPE: PersonEmbeddingTorchReid
+      WEIGHTS: "@format {this.ASSETS}/models/osnet_ain.pth"
+  ASSETS: assets
+  OUTPUTS: output/out_ann4
+  CAMERA_ID: entrance
+  DATE: "2021-02-03"
+
+
+
+

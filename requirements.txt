@@ -1,0 +1,14 @@
+numpy
+Pillow
+opencv-python
+torch==1.7.1
+torchvision===0.8.2
+cython
+scipy
+pandas
+loguru==0.5.3
+trafaret==2.1.0
+dynaconf==3.1.2
+dvc[ssh]
+ffmpeg
+ffmpeg-python

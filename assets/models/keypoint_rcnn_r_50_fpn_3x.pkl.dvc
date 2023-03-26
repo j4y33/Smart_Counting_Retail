@@ -1,0 +1,4 @@
+outs:
+- md5: a6e10b17d80165056707e42495c451bd
+  size: 237002693
+  path: keypoint_rcnn_r_50_fpn_3x.pkl
